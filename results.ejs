@@ -1,0 +1,42 @@
+<style>
+    h1,
+    a,
+    h3 {
+        display: block;
+        text-align: center;
+    }
+
+    table {
+        border-collapse: collapse;
+    }
+</style>
+<h1>Results</h1>
+<a href="/">Search Again!</a>
+<br>
+<br>
+<table border="1" style="margin:  auto;">
+    <tr>
+        <th>Title</th>
+        <th>Year</th>
+        <th>IMDB ID</th>
+        <th>Type</th>
+        <th>Poster</th>
+    </tr>
+    <% if(results.Response == "False") { %>
+    <h3><%= results.Error %> </h3>
+    <% } else { %>
+    <% results["Search"].forEach((result) => { %>
+    <tr>
+        <td><%= result.Title %></td>
+        <td><%= result.Year %></td>
+        <td><%= result.imdbID %></td>
+        <td><%= result.Type %></td>
+        <td><% if(result.Poster == 'N/A'){ %>
+            <p>Not available</p>
+            <% } else { %>
+            <img src="<%= result.Poster %>" alt="<%= result.Title%>">
+            <% } %></td>
+    </tr>
+
+    <% }) } %>
+</table>
